@@ -1,0 +1,72 @@
+#nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+
+  .nav-menu-btn {
+    color: var(--border);
+    z-index: 10;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .nav-menu {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+    height: 100vh;
+    padding: 2rem;
+    width: 345px;
+    padding-top: 300px;
+    gap: 2rem;
+    z-index: 9;
+    transform: translateY(-16px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform 220ms ease,
+      opacity 220ms ease,
+      visibility 0ms linear 220ms;
+
+    &.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transition:
+        transform 220ms ease,
+        opacity 220ms ease,
+        visibility 0ms;
+    }
+
+    a {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: black;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  img {
+    flex-shrink: 1;
+    height: auto;
+    width: 100%;
+    min-width: 0;
+    max-width: 200px;
+    z-index: 10;
+  }
+}

@@ -1,0 +1,29 @@
+.set-selection {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 4rem;
+}
+
+.set-card {
+  width: 100%;
+  max-width: 200px;
+  justify-self: center;
+  border: 1px solid;
+
+  .img-wrapper {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.selected {
+  border-color: red;
+}
