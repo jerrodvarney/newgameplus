@@ -9,7 +9,8 @@ export default function GameCard({ gameConfig, board }) {
           <p>{`Game Mode: ${gameConfig.modeId}`}</p>
           <p>{`Board: ${board.name}`}</p>
         </div>
-        {gameConfig.modeId === '2v2'
+      </div>
+      {gameConfig.modeId === '2v2'
         && (
         <div className="team-parent-container">
           <div className="team-container">
@@ -30,12 +31,6 @@ export default function GameCard({ gameConfig, board }) {
           </div>
         </div>
         )}
-      </div>
-      <div className="player-order">
-        <h4>Turn Order:</h4>
-        {gameConfig.players
-          .map((player) => <p key={player.name}>{player.name}</p>)}
-      </div>
     </div>
   );
 }

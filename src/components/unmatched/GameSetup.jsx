@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 // the selected game mode should be deselected if
 // the number of players change and make that mode invalid
 
-export default function GameSetup({ userConfig }) {
+export default function GameSetup({ userConfig, resetConfig }) {
   // STATE
   const [modeId, setModeId] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0);
@@ -35,6 +35,8 @@ export default function GameSetup({ userConfig }) {
 
   // EVENT HANDLERS
   const updateMode = (id) => {
+    if (modeId === id) return;
+
     if (id === '1v1') {
       setPlayerCount(2);
     } else if (id === '2v2') {
@@ -82,46 +84,53 @@ export default function GameSetup({ userConfig }) {
 
   return (
     <div className="game-setup">
+
+      {modeCapabilities && (
       <div className="mode-selection">
-        {modeCapabilities && (
-          <>
-            <h3>Select Game Mode:</h3>
-            {Object.entries(modeCapabilities.modes)
-              .map(([key, mode]) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => updateMode(key)}
-                  disabled={!mode.enabled}
-                  title={mode.reason}
-                >
-                  {mode.name}
-                </button>
-              ))}
-          </>
-        )}
-      </div>
-      {modeId && (modeId !== '1v1' && modeId !== '2v2') && (
-        <>
-          <h3>How many are playing?</h3>
-          {modeCapabilities.modes[modeId].allowedPlayerCounts
-            .map((count) => (
+        <h3>Select Game Mode:</h3>
+        <div className="mode-btns">
+          {Object.entries(modeCapabilities.modes)
+            .map(([key, mode]) => (
               <button
-                key={`${count}a`}
+                key={key}
                 type="button"
-                onClick={() => setPlayerCount(count)}
-                disabled={modeCapabilities.maxPlayers < count}
+                className={`setup ${key === modeId ? 'selected' : null}`}
+                onClick={() => updateMode(key)}
+                disabled={!mode.enabled}
+                title={mode.reason}
               >
-                {count}
+                {mode.name}
               </button>
             ))}
-        </>
+        </div>
+      </div>
       )}
-      <div className="player-names">
-        {numPlayers
-          ? (
-            <>
-              <h3>Enter player names:</h3>
+
+      {modeId && (modeId !== '1v1' && modeId !== '2v2') && (
+        <div className="player-count">
+          <h3>How many are playing?</h3>
+          <div className="player-btns">
+            {modeCapabilities.modes[modeId].allowedPlayerCounts
+              .map((count) => (
+                <button
+                  key={`${count}a`}
+                  type="button"
+                  className={`setup ${count === numPlayers ? 'selected' : null}`}
+                  onClick={() => setPlayerCount(count)}
+                  disabled={modeCapabilities.maxPlayers < count}
+                >
+                  {count}
+                </button>
+              ))}
+          </div>
+        </div>
+      )}
+
+      {numPlayers
+        ? (
+          <div className="player-names">
+            <h3>Enter player names:</h3>
+            <div className="name-inputs">
               {playerNames
                 .slice(0, numPlayers)
                 .map((name, i) => (
@@ -133,15 +142,18 @@ export default function GameSetup({ userConfig }) {
                     value={name}
                   />
                 ))}
-            </>
-          )
-          : null}
-      </div>
+            </div>
+          </div>
+        )
+        : null}
+
       <div className="submit-container">
-        <button type="button" onClick={createGameConfig} disabled={!modeId || numPlayers <= 0}>
+        <button type="button" className="submit-btn" onClick={createGameConfig} disabled={!modeId || numPlayers <= 0}>
           Submit
         </button>
+        <button type="button" className="submit-btn" onClick={resetConfig}>Edit Sets & Bans</button>
       </div>
+
     </div>
   );
 }

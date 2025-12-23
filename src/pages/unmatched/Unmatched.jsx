@@ -1,6 +1,6 @@
 import logo from '@/assets/logo.png';
-import GameSetup from '@/components/home/GameSetup';
 import Nav from '@/components/nav/Nav';
+import GameSetup from '@/components/unmatched/GameSetup';
 import { clearConfig, loadConfig } from '@/storage/config';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +15,9 @@ export default function Home() {
 
   // EVENT HANDLERS
   const resetConfig = () => {
-    clearConfig('userConfig');
+    // clearConfig('userConfig');
     clearConfig('gameConfig');
-    navigate('/setup');
+    return navigate('/setup');
   };
 
   // ON RENDER
@@ -36,8 +36,7 @@ export default function Home() {
     <div id="home" className="page">
       <aside className="left">
         <Nav />
-        {userConfig && <GameSetup userConfig={userConfig} />}
-        <button type="button" onClick={resetConfig}>Start Over</button>
+        {userConfig && <GameSetup userConfig={userConfig} resetConfig={resetConfig} />}
       </aside>
       <div className="right">
         <img src={logo} className="home-logo" alt="site logo" />

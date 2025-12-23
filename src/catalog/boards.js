@@ -6,9 +6,6 @@ export const boards = {
     name: 'Marmoreal',
     maxPlayers: 4,
     image: '/images/boards/marmoreal.webp',
-    description:
-      'A ruined marble city with chokepoints and elevation that rewards careful positioning and controlled engagements.',
-    tags: ['chokepoints', 'elevation'],
   },
   sarpedon: {
     id: 'sarpedon',
@@ -16,9 +13,6 @@ export const boards = {
     name: 'Sarpedon',
     maxPlayers: 4,
     image: '/images/boards/sarpedon.webp',
-    description:
-      'A more open battleground that encourages fast movement, quick clashes, and aggressive tempo play.',
-    tags: ['open', 'tempo'],
   },
 
   // Robin Hood vs Bigfoot
@@ -28,9 +22,6 @@ export const boards = {
     name: 'Sherwood Forest',
     maxPlayers: 2,
     image: '/images/boards/sherwood-forest.webp',
-    description:
-      'A dense woodland map with tight paths and clever angles, rewarding tactical movement and ranged threats.',
-    tags: ['tight', 'tactical'],
   },
   yukon: {
     id: 'yukon',
@@ -38,9 +29,6 @@ export const boards = {
     name: 'Yukon',
     maxPlayers: 2,
     image: '/images/boards/yukon.webp',
-    description:
-      'A rugged wilderness board with direct lanes and brawl-friendly spacing for aggressive play.',
-    tags: ['open', 'brawl'],
   },
 
   // InGen vs Raptors
@@ -50,9 +38,6 @@ export const boards = {
     name: 'Raptor Paddock',
     maxPlayers: 2,
     image: '/images/boards/raptor-paddock.webp',
-    description:
-      'A tense, hunt-focused battleground designed for tight duels and careful positioning.',
-    tags: ['duel', 'tension'],
   },
 
   // Cobble & Fog
@@ -62,9 +47,6 @@ export const boards = {
     name: 'SoHo',
     maxPlayers: 4,
     image: '/images/boards/soho.webp',
-    description:
-      'Foggy city streets with ambush-friendly routes and corners that reward clever pathing and surprise strikes.',
-    tags: ['ambush', 'urban'],
   },
   'baskerville-manor': {
     id: 'baskerville-manor',
@@ -72,9 +54,6 @@ export const boards = {
     name: 'Baskerville Manor',
     maxPlayers: 4,
     image: '/images/boards/baskerville-manor.webp',
-    description:
-      'A sprawling estate with long sightlines and strong positions, encouraging patient, tactical play.',
-    tags: ['sightlines', 'tactical'],
   },
 
   // Buffy
@@ -84,9 +63,6 @@ export const boards = {
     name: 'Sunnydale High',
     maxPlayers: 4,
     image: '/images/boards/sunnydale-high.webp',
-    description:
-      'Hallways and courtyards create clean lanes and chokepoints, rewarding positioning and coordinated movement.',
-    tags: ['chokepoints', 'lanes'],
   },
   'the-bronze': {
     id: 'the-bronze',
@@ -94,9 +70,6 @@ export const boards = {
     name: 'The Bronze',
     maxPlayers: 4,
     image: '/images/boards/the-bronze.webp',
-    description:
-      'A tight urban venue where space is limited and scrappy fights break out quickly.',
-    tags: ['tight', 'brawl'],
   },
 
   // Little Red vs Beowulf
@@ -106,9 +79,6 @@ export const boards = {
     name: 'Heorot',
     maxPlayers: 2,
     image: '/images/boards/heorot.webp',
-    description:
-      'A compact battlefield that forces frequent clashes and rewards efficient positioning.',
-    tags: ['duel', 'tight'],
   },
 
   // Battle of Legends Vol. 2
@@ -118,9 +88,6 @@ export const boards = {
     name: 'Hanging Gardens',
     maxPlayers: 4,
     image: '/images/boards/hanging-gardens.webp',
-    description:
-      'A lush arena that rewards mobility, timing, and controlling key spaces.',
-    tags: ['mobility', 'control'],
   },
 
   // Marvel: Hell’s Kitchen
@@ -130,9 +97,6 @@ export const boards = {
     name: "Hell's Kitchen",
     maxPlayers: 4,
     image: '/images/boards/hells-kitchen.webp',
-    description:
-      'A gritty urban battleground designed for intense skirmishes and constant pressure.',
-    tags: ['urban', 'brawl'],
   },
 
   // Marvel: Redemption Row
@@ -142,9 +106,6 @@ export const boards = {
     name: 'The Raft',
     maxPlayers: 4,
     image: '/images/boards/the-raft.webp',
-    description:
-      'A high-security prison arena that encourages direct conflict and punishes poor positioning.',
-    tags: ['duel', 'tempo'],
   },
 
   // Jurassic Park: Sattler vs T. Rex
@@ -154,9 +115,6 @@ export const boards = {
     name: 'T. Rex Paddock',
     maxPlayers: 2,
     image: '/images/boards/t-rex-paddock.webp',
-    description:
-      'A contained enclosure built for tense duels—small decisions can swing the entire match.',
-    tags: ['duel', 'tight'],
   },
 
   // Houdini vs The Genie
@@ -166,9 +124,6 @@ export const boards = {
     name: "King Solomon's Mine",
     maxPlayers: 2,
     image: '/images/boards/king-solomons-mine.webp',
-    description:
-      'A dramatic battleground that rewards smart movement and well-timed engagements.',
-    tags: ['tactical', 'duel'],
   },
 
   // Marvel: Teen Spirit
@@ -178,9 +133,6 @@ export const boards = {
     name: 'Navy Pier',
     maxPlayers: 4,
     image: '/images/boards/navy-pier.webp',
-    description:
-      'An open waterfront arena that rewards mobility and smart spacing.',
-    tags: ['open', 'mobility'],
   },
 
   // Marvel: For King and Country
@@ -190,9 +142,6 @@ export const boards = {
     name: 'Helicarrier',
     maxPlayers: 4,
     image: '/images/boards/helicarrier.webp',
-    description:
-      'A high-stakes battlefield with clear lanes that rewards decisive positioning and tactical pressure.',
-    tags: ['lanes', 'tactical'],
   },
 
   // Marvel: Brains and Brawn
@@ -202,9 +151,6 @@ export const boards = {
     name: 'Sanctum Sanctorum',
     maxPlayers: 4,
     image: '/images/boards/sanctum-sanctorum.webp',
-    description:
-      'A mystical battleground that encourages smart positioning and creative tactical play.',
-    tags: ['tactical', 'control'],
   },
 
   // Adventures: Tales to Amaze
@@ -213,20 +159,16 @@ export const boards = {
     setId: 'tales-to-amaze',
     name: 'McMinnville',
     maxPlayers: 5,
+    requiredVillainId: 'martian-invader',
     image: '/images/boards/mcminnville.webp',
-    description:
-      'A cooperative battleground with open spaces designed around scenario play and shared objectives.',
-    tags: ['co-op', 'scenario'],
   },
   'point-pleasant': {
     id: 'point-pleasant',
     setId: 'tales-to-amaze',
     name: 'Point Pleasant',
     maxPlayers: 5,
+    requiredVillainId: 'mothman',
     image: '/images/boards/point-pleasant.webp',
-    description:
-      'A mysterious riverside town board built for cooperative encounters and unpredictable threats.',
-    tags: ['co-op', 'scenario'],
   },
 
   // Sun’s Origin
@@ -236,9 +178,6 @@ export const boards = {
     name: 'Azuchi Castle',
     maxPlayers: 2,
     image: '/images/boards/azuchi-castle.webp',
-    description:
-      'A fortified stronghold with clear lanes and defensive positions—perfect for precise duels.',
-    tags: ['duel', 'tactical'],
   },
 
   // Slings & Arrows
@@ -248,9 +187,6 @@ export const boards = {
     name: 'Globe Theatre',
     maxPlayers: 4,
     image: '/images/boards/globe-theatre.webp',
-    description:
-      'A theatrical arena where positioning and timing feel like staging a performance—ideal for clever, swingy play.',
-    tags: ['thematic', 'tactical'],
   },
 
   // Witcher
@@ -260,38 +196,56 @@ export const boards = {
     name: 'Streets of Novigrad',
     maxPlayers: 4,
     image: '/images/boards/streets-of-novigrad.webp',
-    description:
-      'A bustling city battlefield with opportunities for ambushes, pressure, and tactical maneuvering.',
-    tags: ['urban', 'ambush'],
   },
+
   naglfar: {
     id: 'naglfar',
     setId: 'realms-fall',
     name: 'Naglfar',
     maxPlayers: 4,
     image: '/images/boards/naglfar.webp',
-    description:
-      'A grim, high-stakes battleground that rewards decisive movement and aggressive engagements.',
-    tags: ['aggressive', 'tempo'],
   },
+
   'kaer-morhen': {
     id: 'kaer-morhen',
     setId: 'steel-and-silver',
     name: 'Kaer Morhen',
     maxPlayers: 4,
     image: '/images/boards/kaer-mohren.webp',
-    description:
-      'A fortress map built for disciplined positioning—small advantages compound into big swings.',
-    tags: ['tactical', 'defensive'],
   },
+
   'fayrlund-forest': {
     id: 'fayrlund-forest',
     setId: 'steel-and-silver',
     name: 'Fayrlund Forest',
     maxPlayers: 4,
     image: '/images/boards/fayrlund-forest.webp',
-    description:
-      'A dangerous woodland battleground that rewards mobility, pressure, and hunting down openings.',
-    tags: ['wilderness', 'mobility'],
   },
+
+  // // TMNT
+  // technodrome: {
+  //   id: 'technodrome',
+  //   setId: 'tmnt',
+  //   name: 'Technodrome',
+  //   maxPlayers: 4,
+  //   requiredVillainId: 'krang',
+  //   image: '/images/boards/technodrome.webp',
+  // },
+  // 'new-york-city': {
+  //   id: 'new-york-city',
+  //   setId: 'tmnt',
+  //   name: 'New York City',
+  //   maxPlayers: 4,
+  //   requiredVillainId: 'shredder',
+  //   image: '/images/boards/new-york-city.webp',
+  // },
+
+  // // Shredder vs Krang
+  // 'burning-warehouse': {
+  //   id: 'burning-warehouse',
+  //   setId: 'shredder-vs-krang',
+  //   name: 'Burning Warehouse',
+  //   maxPlayers: 2,
+  //   image: '/images/boards/burning-warehouse.webp',
+  // },
 };
