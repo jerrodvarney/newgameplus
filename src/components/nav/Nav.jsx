@@ -21,10 +21,13 @@ export default function Nav() {
       </button>
       <div className={`nav-menu ${navOpen ? 'open' : ''}`}>
         <Link to="/">Home</Link>
+        <Link to="/unmatched">Unmatched</Link>
         <Link to="/setup">Setup</Link>
         <Link to="/game">My Game</Link>
       </div>
-      <img src={logo} alt="The website logo." />
+      <Link className="nav-logo" to="/">
+        <img src={logo} alt="The website logo." />
+      </Link>
     </div>
   );
 }

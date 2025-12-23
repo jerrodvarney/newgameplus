@@ -51,7 +51,7 @@ export default function Setup() {
 
     const status = saveConfig('userConfig', config);
 
-    if (status) navigate('/');
+    if (status) navigate('/unmatched');
   };
 
   // Cleans up bans with set selection

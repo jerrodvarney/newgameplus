@@ -16,13 +16,17 @@ export default function GameCard({ gameConfig, board }) {
             <h4>Team 1:</h4>
             {gameConfig.players
               .filter((player) => player.team === 1)
-              .map((player) => <p>{player.name}</p>)}
+              .map((player) => (
+                <p key={player.characterId}>{player.name}</p>
+              ))}
           </div>
           <div className="team-container">
             <h4>Team 2:</h4>
             {gameConfig.players
               .filter((player) => player.team === 2)
-              .map((player) => <p>{player.name}</p>)}
+              .map((player) => (
+                <p key={player.characterId}>{player.name}</p>
+              ))}
           </div>
         </div>
         )}
