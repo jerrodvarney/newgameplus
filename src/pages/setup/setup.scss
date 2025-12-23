@@ -3,27 +3,78 @@
   flex-wrap: wrap;
   width: 100%;
   padding: 4rem;
+  gap: 2rem;
+  justify-content: center;
 }
 
+/* =========================
+   SET CARD
+   ========================= */
 .set-card {
   width: 100%;
-  max-width: 200px;
-  justify-self: center;
-  border: 1px solid;
+  max-width: 270px;
+  height: 275px;
+  background-color: var(--bg);
+  padding: .5rem;
+  border: none;
 
-  .img-wrapper {
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    img {
-      width: 100%;
-    }
-  }
+
+  transition:
+    transform 0.25s ease,;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.05);
+  }
+
+  /* =========================
+     IMAGE WRAPPER
+     ========================= */
+  .img-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: .5rem;
+    border-radius: var(--radius);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg);
+
+
+    img {
+      width: 100%;
+      height: 100%;
+
+
+      object-fit: contain;
+      user-select: none;
+      pointer-events: none;
+    }
   }
 }
 
-.selected {
-  border-color: red;
+/* =========================
+   SELECTED STATE
+   ========================= */
+.set-card.selected {
+  border-color: var(--accent-strong, red);
+}
+
+/* =========================
+   RESPONSIVE TWEAKS
+   ========================= */
+@media (max-width: 768px) {
+  .set-selection {
+    padding: 2rem;
+  }
+
+  .set-card {
+    max-width: 200px;
+    height: 200px;
+  }
 }

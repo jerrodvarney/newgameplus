@@ -28,13 +28,13 @@ export default function Game() {
   // EVENT HANDLERS
   const startNewGame = () => {
     clearConfig('gameConfig');
-    navigate('/');
+    navigate('/unmatched');
   };
 
   const rerollGame = () => {
     if (!isValidGameConfig(gameConfig)) {
       clearConfig('gameConfig');
-      navigate('/');
+      navigate('/unmatched');
       return;
     }
 
@@ -77,11 +77,12 @@ export default function Game() {
         <div className="player-card-container">
           <h3>Turn Order</h3>
           {gameConfig?.players
-            .map((player) => (
+            .map((player, i) => (
               <PlayerCard
                 key={player.name}
                 player={player}
                 character={catalog.characters[player.characterId]}
+                i={i}
               />
             ))}
         </div>

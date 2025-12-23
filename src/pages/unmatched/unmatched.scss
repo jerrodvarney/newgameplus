@@ -1,0 +1,21 @@
+.home-logo {
+  width: 300px;
+}
+
+.game-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+
+  button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.selected {
+  border: 1px solid var(--accent);
+}
