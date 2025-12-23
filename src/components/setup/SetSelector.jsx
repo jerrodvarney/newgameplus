@@ -1,23 +1,13 @@
-import { useState } from 'react';
-
-export default function SetSelector({ setInfo, updateSelected }) {
-  // STATE
-  const [isSelected, toggleSelected] = useState(false);
-
-  // EVENT HANDLERS
-  const toggleSet = () => {
-    toggleSelected(!isSelected);
-
-    updateSelected();
-  };
+export default function SetSelector({ setInfo, updateSelected, selectedSets }) {
+  const isSelected = selectedSets.includes(setInfo.id);
 
   return (
     <button
       type="button"
-      className="set-card"
-      onClick={toggleSet}
+      className={`set-card ${isSelected ? 'selected' : ''}`}
+      onClick={updateSelected}
     >
-      <div className={`img-wrapper ${isSelected && 'selected'}`}>
+      <div className="img-wrapper">
         <img src={setInfo.image} alt={`Art for ${setInfo.name}`} />
       </div>
     </button>

@@ -7,29 +7,38 @@ const MODE_DEFS = {
   tales: { name: 'Tales to Amaze', allowedPlayerCounts: [1, 2, 3, 4] },
 };
 
-const getOwnedChars = (ownedSetIds = []) => ownedSetIds
+export const getOwnedChars = (ownedSetIds = []) => ownedSetIds
   .flatMap((id) => catalog.sets[id]?.characterIds ?? []);
 
-const getValidChars = (ownedSetIds, bannedCharacterIds) => getOwnedChars(ownedSetIds)
-  .filter((id) => !bannedCharacterIds.includes(id))
+const getValidChars = (ownedSetIds = [], bannedCharacterIds = {}) => getOwnedChars(ownedSetIds)
+  .filter((id) => !bannedCharacterIds[id])
   .map((id) => catalog.characters[id]);
 
-const getOwnedBoards = (ownedSetIds = []) => ownedSetIds
+export const getOwnedBoards = (ownedSetIds = []) => ownedSetIds
   .flatMap((id) => catalog.sets[id]?.boardIds ?? []);
 
-const getValidBoards = (ownedSetIds, bannedBoardIds) => getOwnedBoards(ownedSetIds)
-  .filter((id) => !bannedBoardIds.includes(id))
+const getValidBoards = (ownedSetIds = [], bannedBoardIds = {}) => getOwnedBoards(ownedSetIds)
+  .filter((id) => !bannedBoardIds[id])
   .map((id) => catalog.boards[id]);
+
+export const pruneBans = (prevBans, ownedIds) => {
+  const ownedSet = new Set(ownedIds);
+  const pruned = {};
+
+  Object.keys(prevBans)
+    .forEach((id) => {
+      if (ownedSet.has(id)) pruned[id] = true;
+    });
+
+  return pruned;
+};
 
 const getMaxPlayersFromBoards = (validBoards = []) => {
   if (!validBoards.length) return 0;
   return Math.max(...validBoards.map((b) => b.maxPlayers ?? 0));
 };
 
-const pickRandom = (items) => {
-  if (!items?.length) return null;
-  return items[Math.floor(Math.random() * items.length)];
-};
+const pickRandom = (items = []) => items[Math.floor(Math.random() * items.length)];
 
 const getRandomOrder = (numPlayers) => Array
   .from({ length: numPlayers }, (_, i) => i + 1)

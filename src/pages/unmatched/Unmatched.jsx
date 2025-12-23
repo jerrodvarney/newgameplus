@@ -15,7 +15,7 @@ export default function Home() {
 
   // EVENT HANDLERS
   const resetConfig = () => {
-    clearConfig('userConfig');
+    // clearConfig('userConfig');
     clearConfig('gameConfig');
     navigate('/setup');
   };
