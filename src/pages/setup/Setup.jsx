@@ -85,7 +85,7 @@ export default function Setup() {
 
   return (
     <div id="setup" className="page">
-      <aside className="left">
+      <aside className="left setup-left">
         <Nav />
         <div className="setup-container">
           <div className="side-container">

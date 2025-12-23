@@ -44,3 +44,10 @@ html, body {
   flex: 1;
   padding: 2rem 1rem;
 }
+
+.submit-btn {
+  border: 3px solid var(--text);
+  border-radius: var(--radius);
+  background-color: var(--text);
+  padding: 0.5rem;
+}

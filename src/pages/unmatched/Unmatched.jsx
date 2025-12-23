@@ -17,7 +17,7 @@ export default function Home() {
   const resetConfig = () => {
     // clearConfig('userConfig');
     clearConfig('gameConfig');
-    navigate('/setup');
+    return navigate('/setup');
   };
 
   // ON RENDER
@@ -36,8 +36,7 @@ export default function Home() {
     <div id="home" className="page">
       <aside className="left">
         <Nav />
-        {userConfig && <GameSetup userConfig={userConfig} />}
-        <button type="button" onClick={resetConfig}>Start Over</button>
+        {userConfig && <GameSetup userConfig={userConfig} resetConfig={resetConfig} />}
       </aside>
       <div className="right">
         <img src={logo} className="home-logo" alt="site logo" />

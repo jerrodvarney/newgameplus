@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 // the selected game mode should be deselected if
 // the number of players change and make that mode invalid
 
-export default function GameSetup({ userConfig }) {
+export default function GameSetup({ userConfig, resetConfig }) {
   // STATE
   const [modeId, setModeId] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0);
@@ -35,6 +35,8 @@ export default function GameSetup({ userConfig }) {
 
   // EVENT HANDLERS
   const updateMode = (id) => {
+    if (modeId === id) return;
+
     if (id === '1v1') {
       setPlayerCount(2);
     } else if (id === '2v2') {
@@ -146,9 +148,10 @@ export default function GameSetup({ userConfig }) {
         : null}
 
       <div className="submit-container">
-        <button type="button" onClick={createGameConfig} disabled={!modeId || numPlayers <= 0}>
+        <button type="button" className="submit-btn" onClick={createGameConfig} disabled={!modeId || numPlayers <= 0}>
           Submit
         </button>
+        <button type="button" className="submit-btn" onClick={resetConfig}>Return to Setup</button>
       </div>
 
     </div>

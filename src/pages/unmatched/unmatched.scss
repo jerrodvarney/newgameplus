@@ -90,11 +90,32 @@
 
 .submit-container {
   margin-top: auto;
+  flex-direction: column;
+  gap: 1rem;
   display: flex;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 2rem 0 0;
+
+  .submit-btn {
+    border: 3px solid var(--text);
+    border-radius: var(--radius);
+    background-color: var(--text);
+    padding: 0.5rem;
+    width: 100%;
+  }
+}
+
+.game-setup {
+  h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-weight: bold;
+  }
 
   button {
-    width: 100%;
+    // font-weight: bold;
   }
 }

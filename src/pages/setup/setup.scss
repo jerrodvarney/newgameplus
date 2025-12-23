@@ -147,7 +147,8 @@ button {
 }
 
 .selected {
-  border: var(--selected) !important
+  border: var(--selected) !important;
+  transform: scale(1.05);
 }
 
 .selected-btn {
