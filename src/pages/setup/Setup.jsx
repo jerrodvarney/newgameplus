@@ -47,6 +47,11 @@ export default function Setup() {
     });
   };
 
+  const quickSelect = (bool) => {
+    if (bool) setSelectedSets(Object.keys(catalog.sets));
+    else setSelectedSets([]);
+  };
+
   // EVENT HANDLERS
   const submitSetup = () => {
     const validBoards = getOwnedBoards(selectedSets);
@@ -154,7 +159,7 @@ export default function Setup() {
                         className={bannedChars[charId] ? 'selected-btn' : null}
                         onClick={() => toggleBannedChars(charId)}
                       >
-                        {catalog.characters[charId].name}
+                        {catalog.characters[charId]?.name}
                       </button>
                     ))}
                 </div>
@@ -162,11 +167,16 @@ export default function Setup() {
             </div>
           </div>
           )}
+
           <div className="setup-submit-container">
+            <button type="button" className="submit-btn" onClick={() => quickSelect(true)}>Select All</button>
+            <button type="button" className="submit-btn" onClick={() => quickSelect(false)}>Deselect All</button>
             <button type="button" className="submit-btn" onClick={submitSetup}>Submit</button>
           </div>
+
         </div>
       </aside>
+
       <div className="right set-selection">
         {Object.values(catalog.sets)
           .map((set) => (

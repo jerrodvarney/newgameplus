@@ -125,19 +125,13 @@ const getModeDisableReason = (
   return reasons.join(' ');
 };
 
-const checkModesEnabled = (
-  maxPlayersFromBoards,
-  validCharacterCount,
-  talesAvailable,
-) => {
+const checkModesEnabled = (maxPlayersFromBoards, validCharacterCount, talesAvailable) => {
   const maxPlayers = Math.min(maxPlayersFromBoards, validCharacterCount);
 
   return Object
     .entries(MODE_DEFS)
     .reduce((acc, [modeId, def]) => {
-      const allowedPlayerCounts = modeId === 'ffa' && talesAvailable
-        ? [3, 4, 5]
-        : def.allowedPlayerCounts;
+      const { allowedPlayerCounts } = def;
 
       const enabled = allowedPlayerCounts.some((count) => {
         if (count > maxPlayers) return false;

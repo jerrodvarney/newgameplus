@@ -151,7 +151,7 @@ export default function GameSetup({ userConfig, resetConfig }) {
         <button type="button" className="submit-btn" onClick={createGameConfig} disabled={!modeId || numPlayers <= 0}>
           Submit
         </button>
-        <button type="button" className="submit-btn" onClick={resetConfig}>Return to Setup</button>
+        <button type="button" className="submit-btn" onClick={resetConfig}>Edit Sets & Bans</button>
       </div>
 
     </div>

@@ -1,4 +1,5 @@
 import catalog from '@/catalog';
+import CharacterCard from '@/components/game/CharacterCard';
 import GameCard from '@/components/game/GameCard';
 import PlayerCard from '@/components/game/PlayerCard';
 import Nav from '@/components/nav/Nav';
@@ -74,6 +75,12 @@ export default function Game() {
     <div id="home" className="page">
       <aside id="game-left" className="left">
         <Nav />
+        {gameConfig && (
+        <GameCard
+          gameConfig={gameConfig}
+          board={gameBoard}
+        />
+        )}
         <div className="player-card-container">
           <h3>Turn Order</h3>
           {gameConfig?.players
@@ -87,15 +94,25 @@ export default function Game() {
             ))}
         </div>
         <div className="game-reset-btns">
-          <button type="button" onClick={rerollGame} disabled={!gameConfig}>Re-Roll</button>
-          <button type="button" onClick={startNewGame}>Start New Game</button>
+          <button type="button" className="game-btn" onClick={rerollGame} disabled={!gameConfig}>Re-Roll</button>
+          <button type="button" className="game-btn" onClick={startNewGame}>Start New Game</button>
         </div>
       </aside>
       <div id="game-right" className="right">
         {gameConfig
           ? (
             <>
-              <GameCard gameConfig={gameConfig} board={gameBoard} />
+              <div className="game-main">
+                <div className="char-card-container">
+                  {gameConfig.players
+                    .map((player) => (
+                      <CharacterCard
+                        key={player.characterId}
+                        character={catalog.characters[player.characterId]}
+                      />
+                    ))}
+                </div>
+              </div>
               <img src={gameBoard?.image} alt={`game board: ${gameBoard?.name}`} />
             </>
           )
