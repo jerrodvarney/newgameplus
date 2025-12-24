@@ -66,7 +66,7 @@ export default function Setup() {
 
     const status = saveConfig('userConfig', config);
 
-    if (status) navigate('/unmatched');
+    if (status) navigate('/');
   };
 
   // ON RENDER
