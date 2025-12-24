@@ -29,13 +29,13 @@ export default function Game() {
   // EVENT HANDLERS
   const startNewGame = () => {
     clearConfig('gameConfig');
-    navigate('/unmatched');
+    navigate('/');
   };
 
   const rerollGame = () => {
     if (!isValidGameConfig(gameConfig)) {
       clearConfig('gameConfig');
-      navigate('/unmatched');
+      navigate('/');
       return;
     }
 
