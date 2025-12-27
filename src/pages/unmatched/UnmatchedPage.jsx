@@ -4,9 +4,9 @@ import GameSetup from '@/components/unmatched/GameSetup';
 import { clearConfig, loadConfig } from '@/storage/config';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './unmatched.scss';
+import './unmatched-page.scss';
 
-export default function Home() {
+export default function UnmatchedPage() {
   // STATE
   const [userConfig, setUserConfig] = useState(null);
 
@@ -14,18 +14,19 @@ export default function Home() {
   const navigate = useNavigate();
 
   // EVENT HANDLERS
-  const resetConfig = () => {
-    // clearConfig('userConfig');
+  const resetGameConfig = () => {
     clearConfig('gameConfig');
-    return navigate('/setup');
+    navigate('/setup');
   };
 
-  // ON RENDER
+  // ON MOUNT: load userConfig or bounce to setup
   useEffect(() => {
     const config = loadConfig('userConfig');
 
-    if (!config?.ownedSetIds.length) {
-      navigate('/setup');
+    const hasOwnedSets = Array.isArray(config?.ownedSetIds) && config.ownedSetIds.length > 0;
+
+    if (!hasOwnedSets) {
+      navigate('/setup', { replace: true });
       return;
     }
 
@@ -33,14 +34,20 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <div id="home" className="page">
+    <div id="unmatched" className="page">
       <aside className="left">
         <Nav />
-        {userConfig && <GameSetup userConfig={userConfig} resetConfig={resetConfig} />}
+        {userConfig && (
+          <GameSetup
+            userConfig={userConfig}
+            resetConfig={resetGameConfig}
+          />
+        )}
       </aside>
-      <div className="right">
-        <img src={logo} className="home-logo" alt="site logo" />
-      </div>
+
+      <main className="right">
+        <img src={logo} className="home-logo" alt="NewGame+ logo" />
+      </main>
     </div>
   );
 }

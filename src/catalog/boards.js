@@ -221,31 +221,4 @@ export const boards = {
     maxPlayers: 4,
     image: '/images/boards/fayrlund-forest.webp',
   },
-
-  // // TMNT
-  // technodrome: {
-  //   id: 'technodrome',
-  //   setId: 'tmnt',
-  //   name: 'Technodrome',
-  //   maxPlayers: 4,
-  //   requiredVillainId: 'krang',
-  //   image: '/images/boards/technodrome.webp',
-  // },
-  // 'new-york-city': {
-  //   id: 'new-york-city',
-  //   setId: 'tmnt',
-  //   name: 'New York City',
-  //   maxPlayers: 4,
-  //   requiredVillainId: 'shredder',
-  //   image: '/images/boards/new-york-city.webp',
-  // },
-
-  // // Shredder vs Krang
-  // 'burning-warehouse': {
-  //   id: 'burning-warehouse',
-  //   setId: 'shredder-vs-krang',
-  //   name: 'Burning Warehouse',
-  //   maxPlayers: 2,
-  //   image: '/images/boards/burning-warehouse.webp',
-  // },
 };

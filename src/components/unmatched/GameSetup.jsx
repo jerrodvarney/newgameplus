@@ -5,9 +5,6 @@ import { saveConfig } from '@/storage/config';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// the selected game mode should be deselected if
-// the number of players change and make that mode invalid
-
 export default function GameSetup({ userConfig, resetConfig }) {
   // STATE
   const [modeId, setModeId] = useState(null);
