@@ -1,9 +1,13 @@
 import catalog from '@/catalog';
 import Nav from '@/components/nav/Nav';
 import SetSelector from '@/components/setup/SetSelector';
-import { getOwnedBoards, getOwnedChars, pruneBans } from '@/game-logic/unmatched';
+import {
+  getCapabilities, getOwnedBoards, getOwnedChars, pruneBans,
+} from '@/game-logic/unmatched';
 import { loadConfig, saveConfig } from '@/storage/config';
-import { useEffect, useState } from 'react';
+import {
+  useEffect, useMemo, useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './setup-page.scss';
 
@@ -52,8 +56,19 @@ export default function SetupPage() {
     else setSelectedSets([]);
   };
 
+  // DERIVED VALUES
+  const capabilities = useMemo(() => getCapabilities({
+    ownedSetIds: selectedSets,
+    bannedBoardIds: banBoards ? bannedBoards : {},
+    bannedCharacterIds: banChars ? bannedChars : {},
+  }), [selectedSets, bannedBoards, bannedChars, banBoards, banChars]);
+
+  const anyModePlayable = Object.values(capabilities.modes).some((mode) => mode.enabled);
+
   // EVENT HANDLERS
   const submitSetup = () => {
+    if (!anyModePlayable) return;
+
     const validBoards = getOwnedBoards(selectedSets);
     const validChars = getOwnedChars(selectedSets);
 
@@ -168,10 +183,25 @@ export default function SetupPage() {
           </div>
           )}
 
+          {selectedSets.length > 0 && !anyModePlayable && (
+            <div className="setup-warning" role="alert">
+              With your current sets and bans, no game mode can be played.
+              Select more sets or remove some bans to continue.
+            </div>
+          )}
+
           <div className="setup-submit-container">
             <button type="button" className="submit-btn" onClick={() => quickSelect(true)}>Select All</button>
             <button type="button" className="submit-btn" onClick={() => quickSelect(false)}>Deselect All</button>
-            <button type="button" className="submit-btn" onClick={submitSetup}>Submit</button>
+            <button
+              type="button"
+              className="submit-btn"
+              onClick={submitSetup}
+              disabled={!anyModePlayable}
+              title={!anyModePlayable ? 'Select sets (and adjust bans) that support at least one game mode.' : undefined}
+            >
+              Submit
+            </button>
           </div>
 
         </div>

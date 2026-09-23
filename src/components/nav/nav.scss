@@ -32,7 +32,7 @@
     flex-direction: column;
     height: 100dvh;
     padding: 6rem 2rem 2rem;
-    width: min(345px, 85vw);
+    width: 100vw;
     gap: 1.75rem;
     z-index: 9;
     transform: translateX(-16px);
@@ -65,10 +65,12 @@
       color: var(--text);
       transition: color 0.2s ease, transform 0.2s ease;
 
-      &:hover {
-        cursor: pointer;
-        color: var(--accent);
-        transform: translateX(4px);
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          cursor: pointer;
+          color: var(--accent);
+          transform: translateX(4px);
+        }
       }
     }
   }
@@ -83,12 +85,20 @@
   }
 }
 
+@media (min-width: 900px) {
+  #nav .nav-menu {
+    width: min(345px, 85vw);
+  }
+}
+
 .nav-logo {
   z-index: 10;
   transition: transform .3s ease;
   line-height: 0;
 
-  &:hover {
-    transform: scale(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }

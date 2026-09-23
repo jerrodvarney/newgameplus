@@ -104,9 +104,11 @@ button {
   min-height: 44px;
   transition: border-color 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
 
-  &:hover {
-    cursor: pointer;
-    border-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      border-color: var(--accent);
+    }
   }
 
   &:active {

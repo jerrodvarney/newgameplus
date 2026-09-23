@@ -56,10 +56,12 @@
 
   transition: transform 0.2s ease, border-color 0.2s ease;
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.04);
-    border-color: var(--accent-dim);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.04);
+      border-color: var(--accent-dim);
+    }
   }
 
   &:active {
@@ -177,9 +179,11 @@
     min-height: 40px;
     transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
 
-    &:hover {
-      cursor: pointer;
-      border-color: var(--accent);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        cursor: pointer;
+        border-color: var(--accent);
+      }
     }
 
     &:active {
@@ -191,6 +195,17 @@
     background-color: var(--accent-dim);
     color: #fff;
   }
+}
+
+.setup-warning {
+  border: 2px solid var(--accent);
+  background-color: var(--accent-dim);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  font-weight: 600;
 }
 
 .setup-submit-container {

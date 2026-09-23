@@ -3,7 +3,7 @@ import catalog from '@/catalog';
 const MODE_DEFS = {
   '1v1': { name: '1 vs 1', allowedPlayerCounts: [2] },
   '2v2': { name: '2 vs 2', allowedPlayerCounts: [4] },
-  ffa: { name: 'Free for All', allowedPlayerCounts: [3, 4] },
+  ffa: { name: 'Free for All', allowedPlayerCounts: [3, 4, 5] },
   tales: { name: 'Tales to Amaze', allowedPlayerCounts: [1, 2, 3, 4] },
 };
 

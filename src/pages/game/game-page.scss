@@ -157,8 +157,10 @@
   border: 1px solid #2a2a2a;
   transition: transform 0.2s ease;
 
-  &:hover {
-    transform: translateY(-4px);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: translateY(-4px);
+    }
   }
 }
 
