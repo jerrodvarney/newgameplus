@@ -3,7 +3,7 @@ import catalog from '@/catalog';
 const MODE_DEFS = {
   '1v1': { name: '1 vs 1', allowedPlayerCounts: [2] },
   '2v2': { name: '2 vs 2', allowedPlayerCounts: [4] },
-  ffa: { name: 'Free for All', allowedPlayerCounts: [3, 4, 5] },
+  ffa: { name: 'Free for All', allowedPlayerCounts: [3, 4] },
   tales: { name: 'Tales to Amaze', allowedPlayerCounts: [1, 2, 3, 4] },
 };
 
@@ -62,7 +62,7 @@ const getRandomBoardId = ({ ownedSetIds, bannedBoardIds }, numPlayers, modeId) =
   let validBoards = getValidBoards(ownedSetIds, bannedBoardIds)
     .filter((board) => (board.maxPlayers ?? 0) >= numPlayers);
 
-  if (numPlayers === 5 || modeId === 'tales') {
+  if (modeId === 'tales') {
     validBoards = validBoards.filter((board) => board.setId === 'tales-to-amaze');
   }
 

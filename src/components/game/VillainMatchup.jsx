@@ -34,7 +34,9 @@ export default function VillainMatchup({ villain, minions }) {
 
         <div className="villain-hex">
           {villain.startingSpace && (
-            <span className="char-card-space">{`Space ${villain.startingSpace}`}</span>
+            <div className="char-card-badges">
+              <span className="char-card-space">{`Space ${villain.startingSpace}`}</span>
+            </div>
           )}
           <div className="hex-inner" style={{ backgroundImage: `url(${villain.image})` }}>
             <span className="hex-name">{villain.name}</span>

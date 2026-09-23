@@ -6,7 +6,9 @@ import VillainMatchup from '@/components/game/VillainMatchup';
 import Nav from '@/components/nav/Nav';
 import { generateGameConfig } from '@/game-logic/unmatched';
 import { clearConfig, loadConfig, saveConfig } from '@/storage/config';
-import { useEffect, useState } from 'react';
+import {
+  Fragment, useEffect, useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './game-page.scss';
 
@@ -115,7 +117,7 @@ export default function Game() {
               <div className="game-main">
                 <div className="char-card-container">
                   {isDuel && (
-                    <div className="matchup-row">
+                    <div className="matchup-row duel-row">
                       <CharacterCard
                         character={catalog.characters[gameConfig.players[0].characterId]}
                         playerName={gameConfig.players[0].name}
@@ -156,17 +158,26 @@ export default function Game() {
                     </div>
                   )}
 
-                  {isFfa && gameConfig.players
-                    .map((player, i) => (
-                      <div className="ffa-card-group" key={player.characterId}>
-                        {i > 0 && <span className="vs-chip">VS</span>}
-                        <CharacterCard
-                          character={catalog.characters[player.characterId]}
-                          playerName={player.name}
-                          startingSpace={player.turnOrder}
-                        />
-                      </div>
-                    ))}
+                  {isFfa && (
+                    <div className="ffa-grid">
+                      {gameConfig.players.map((player, i) => {
+                        const isTrailingOdd = gameConfig.players.length % 2 !== 0
+                          && i === gameConfig.players.length - 1;
+
+                        return (
+                          <Fragment key={player.characterId}>
+                            {i === 2 && <span className="vs-badge ffa-vs-badge">VS</span>}
+                            <CharacterCard
+                              character={catalog.characters[player.characterId]}
+                              playerName={player.name}
+                              startingSpace={player.turnOrder}
+                              className={isTrailingOdd ? 'ffa-card-centered' : undefined}
+                            />
+                          </Fragment>
+                        );
+                      })}
+                    </div>
+                  )}
 
                   {!isDuel && !isTeamMode && !isFfa && gameConfig.players
                     .map((player) => (
