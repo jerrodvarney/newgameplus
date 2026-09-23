@@ -1,15 +1,19 @@
 import {
   generateGameConfig, getCapabilities,
 } from '@/game-logic/unmatched';
-import { saveConfig } from '@/storage/config';
+import { loadConfig, saveConfig } from '@/storage/config';
 import { useEffect, useState } from 'react';
+import { IoClose } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
 export default function GameSetup({ userConfig, resetConfig }) {
   // STATE
-  const [modeId, setModeId] = useState(null);
-  const [numPlayers, setNumPlayers] = useState(0);
-  const [playerNames, setPlayerNames] = useState([]);
+  // lazy initializers restore any in-progress setup directly on mount, so
+  // there's never a blank-state render that a persist effect could clobber
+  // the saved data with (a plain restore-then-persist effect pair races here).
+  const [modeId, setModeId] = useState(() => loadConfig('playerSetup')?.modeId ?? null);
+  const [numPlayers, setNumPlayers] = useState(() => loadConfig('playerSetup')?.numPlayers ?? 0);
+  const [playerNames, setPlayerNames] = useState(() => loadConfig('playerSetup')?.playerNames ?? []);
   const [modeCapabilities, setModeCapabilities] = useState(null);
 
   // ROUTER
@@ -60,7 +64,16 @@ export default function GameSetup({ userConfig, resetConfig }) {
     return name || `Player ${i + 1}`;
   });
 
+  // DERIVED VALUES
+  const enteredNames = playerNames
+    .slice(0, numPlayers)
+    .map((name) => name?.trim().toLowerCase())
+    .filter(Boolean);
+  const hasDuplicateNames = new Set(enteredNames).size !== enteredNames.length;
+
   const createGameConfig = () => {
+    if (hasDuplicateNames) return;
+
     const sanitizedNames = sanitizeNames();
 
     const config = generateGameConfig({
@@ -71,6 +84,11 @@ export default function GameSetup({ userConfig, resetConfig }) {
 
     if (saveConfig('gameConfig', config)) navigate('/game');
   };
+
+  // persists mode/player setup as it changes, so it survives navigating away and back
+  useEffect(() => {
+    saveConfig('playerSetup', { modeId, numPlayers, playerNames });
+  }, [modeId, numPlayers, playerNames]);
 
   // updates mode selection capabilities on userConfig change
   useEffect(() => {
@@ -103,7 +121,7 @@ export default function GameSetup({ userConfig, resetConfig }) {
       </div>
       )}
 
-      {modeId && (modeId !== '1v1' && modeId !== '2v2') && (
+      {modeCapabilities && modeId && (modeId !== '1v1' && modeId !== '2v2') && (
         <div className="player-count">
           <h3>How many are playing?</h3>
           <div className="player-btns">
@@ -131,21 +149,43 @@ export default function GameSetup({ userConfig, resetConfig }) {
               {playerNames
                 .slice(0, numPlayers)
                 .map((name, i) => (
-                  <input
-                    key={`input${i}`} // eslint-disable-line react/no-array-index-key
-                    type="text"
-                    placeholder={`Player ${i + 1}`}
-                    onChange={(e) => updateNames(e.target.value, i)}
-                    value={name}
-                  />
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div className="name-input-row" key={`input${i}`}>
+                    <input
+                      type="text"
+                      placeholder={`Player ${i + 1}`}
+                      onChange={(e) => updateNames(e.target.value, i)}
+                      value={name}
+                    />
+                    {name && (
+                      <button
+                        type="button"
+                        className="name-clear-btn"
+                        onClick={() => updateNames('', i)}
+                        aria-label={`Clear name for player ${i + 1}`}
+                      >
+                        <IoClose size="1.1rem" />
+                      </button>
+                    )}
+                  </div>
                 ))}
             </div>
+            {hasDuplicateNames && (
+              <div className="name-warning" role="alert">
+                Two or more players have the same name. Please make sure every name is unique.
+              </div>
+            )}
           </div>
         )
         : null}
 
       <div className="submit-container">
-        <button type="button" className="submit-btn" onClick={createGameConfig} disabled={!modeId || numPlayers <= 0}>
+        <button
+          type="button"
+          className="submit-btn"
+          onClick={createGameConfig}
+          disabled={!modeId || numPlayers <= 0 || hasDuplicateNames}
+        >
           Submit
         </button>
         <button type="button" className="submit-btn" onClick={resetConfig}>Edit Sets & Bans</button>

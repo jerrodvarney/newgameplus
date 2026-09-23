@@ -7,6 +7,8 @@ const MODE_DEFS = {
   tales: { name: 'Tales to Amaze', allowedPlayerCounts: [1, 2, 3, 4] },
 };
 
+export const getModeName = (modeId) => MODE_DEFS[modeId]?.name ?? modeId;
+
 export const getOwnedChars = (ownedSetIds = []) => ownedSetIds
   .flatMap((id) => catalog.sets[id]?.characterIds ?? []);
 

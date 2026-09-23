@@ -6,7 +6,9 @@ import VillainMatchup from '@/components/game/VillainMatchup';
 import Nav from '@/components/nav/Nav';
 import { generateGameConfig } from '@/game-logic/unmatched';
 import { clearConfig, loadConfig, saveConfig } from '@/storage/config';
-import { useEffect, useState } from 'react';
+import {
+  Fragment, useEffect, useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './game-page.scss';
 
@@ -29,6 +31,7 @@ export default function Game() {
     .filter(Boolean) ?? [];
   const isDuel = gameConfig?.modeId === '1v1' && gameConfig.players.length === 2;
   const isTeamMode = gameConfig?.modeId === '2v2';
+  const isFfa = gameConfig?.modeId === 'ffa';
   const teamOnePlayers = isTeamMode ? gameConfig.players.filter((p) => p.team === 1) : [];
   const teamTwoPlayers = isTeamMode ? gameConfig.players.filter((p) => p.team === 2) : [];
 
@@ -115,9 +118,17 @@ export default function Game() {
                 <div className="char-card-container">
                   {isDuel && (
                     <>
-                      <CharacterCard character={catalog.characters[gameConfig.players[0].characterId]} />
+                      <CharacterCard
+                        character={catalog.characters[gameConfig.players[0].characterId]}
+                        playerName={gameConfig.players[0].name}
+                        startingSpace={gameConfig.players[0].turnOrder}
+                      />
                       <span className="vs-badge">VS</span>
-                      <CharacterCard character={catalog.characters[gameConfig.players[1].characterId]} />
+                      <CharacterCard
+                        character={catalog.characters[gameConfig.players[1].characterId]}
+                        playerName={gameConfig.players[1].name}
+                        startingSpace={gameConfig.players[1].turnOrder}
+                      />
                     </>
                   )}
 
@@ -128,6 +139,8 @@ export default function Game() {
                           <CharacterCard
                             key={player.characterId}
                             character={catalog.characters[player.characterId]}
+                            playerName={player.name}
+                            startingSpace={player.turnOrder}
                           />
                         ))}
                       </div>
@@ -137,17 +150,33 @@ export default function Game() {
                           <CharacterCard
                             key={player.characterId}
                             character={catalog.characters[player.characterId]}
+                            playerName={player.name}
+                            startingSpace={player.turnOrder}
                           />
                         ))}
                       </div>
                     </>
                   )}
 
-                  {!isDuel && !isTeamMode && gameConfig.players
+                  {isFfa && gameConfig.players
+                    .map((player, i) => (
+                      <Fragment key={player.characterId}>
+                        {i > 0 && <span className="vs-chip">VS</span>}
+                        <CharacterCard
+                          character={catalog.characters[player.characterId]}
+                          playerName={player.name}
+                          startingSpace={player.turnOrder}
+                        />
+                      </Fragment>
+                    ))}
+
+                  {!isDuel && !isTeamMode && !isFfa && gameConfig.players
                     .map((player) => (
                       <CharacterCard
                         key={player.characterId}
                         character={catalog.characters[player.characterId]}
+                        playerName={player.name}
+                        startingSpace={player.turnOrder}
                       />
                     ))}
                 </div>

@@ -147,6 +147,7 @@
 }
 
 .character-card {
+  position: relative;
   width: 200px;
   height: 280px;
   border-radius: 14px;
@@ -170,6 +171,29 @@
       transform: translateY(-4px);
     }
   }
+}
+
+.char-card-player,
+.char-card-space {
+  position: absolute;
+  z-index: 2;
+  top: 0.6rem;
+  background-color: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.7rem;
+  line-height: 1;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-dim);
+}
+
+.char-card-player {
+  left: 0.6rem;
+}
+
+.char-card-space {
+  right: 0.6rem;
 }
 
 .char-card-info {
@@ -204,7 +228,7 @@
 .board-card {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 720px;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--accent-dim);
@@ -284,6 +308,15 @@
   letter-spacing: 0.05em;
 }
 
+.vs-chip {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0 0.25rem;
+}
+
 .villain-cluster {
   display: flex;
   align-items: center;
@@ -309,6 +342,7 @@
 }
 
 .villain-hex {
+  position: relative;
   border-radius: 22px;
   padding: 3px;
   display: flex;
@@ -317,6 +351,12 @@
   height: 156px;
   background-color: var(--accent);
   box-shadow: var(--shadow);
+}
+
+.villain-hex .char-card-space {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
 }
 
 .minion-hex .hex-inner {

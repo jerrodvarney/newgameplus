@@ -1,4 +1,5 @@
 import catalog from '@/catalog';
+import { getModeName } from '@/game-logic/unmatched';
 
 export default function GameCard({ gameConfig, board }) {
   return (
@@ -6,8 +7,8 @@ export default function GameCard({ gameConfig, board }) {
       <h3>{catalog.name}</h3>
       <div className="game-card-top">
         <div className="game-info">
-          <p>{`Game Mode: ${gameConfig.modeId}`}</p>
-          <p>{`Board: ${board.name} (${catalog.sets[board.setId]?.name})`}</p>
+          <p>{`Game Mode: ${getModeName(gameConfig.modeId)}`}</p>
+          <p>{`Board: ${board.name}`}</p>
           {gameConfig.villainId && (
             <p>{`Villain: ${catalog.villains[gameConfig.villainId]?.name}`}</p>
           )}
