@@ -156,6 +156,7 @@ export default function GameSetup({ userConfig, resetConfig }) {
                       placeholder={`Player ${i + 1}`}
                       onChange={(e) => updateNames(e.target.value, i)}
                       value={name}
+                      maxLength={20}
                     />
                     {name && (
                       <button

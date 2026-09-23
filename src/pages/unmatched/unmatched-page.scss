@@ -79,7 +79,7 @@
 
     input {
       width: 100%;
-      padding: 0.75rem 2.75rem 0.75rem 1rem;
+      padding: 0.75rem 3.25rem 0.75rem 1rem;
       border-radius: var(--radius);
       background-color: var(--text);
       color: #161616;
@@ -118,14 +118,14 @@
 
 .name-clear-btn {
   position: absolute;
-  right: 0.5rem;
+  right: 0.25rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
   background-color: rgba(0, 0, 0, 0.15);

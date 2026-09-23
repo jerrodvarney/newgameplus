@@ -7,16 +7,18 @@ export default function GameCard({ gameConfig, board }) {
       <h3>{catalog.name}</h3>
       <div className="game-card-top">
         <div className="game-info">
-          <p>{`Game Mode: ${getModeName(gameConfig.modeId)}`}</p>
-          <p>{`Board: ${board.name}`}</p>
+          <p><strong>Game Mode:</strong> {getModeName(gameConfig.modeId)}</p>
+          <p><strong>Board:</strong> {board.name}</p>
           {gameConfig.villainId && (
-            <p>{`Villain: ${catalog.villains[gameConfig.villainId]?.name}`}</p>
+            <p><strong>Villain:</strong> {catalog.villains[gameConfig.villainId]?.name}</p>
           )}
           {gameConfig.minionIds?.length > 0 && (
             <p>
-              {`Minions: ${gameConfig.minionIds
+              <strong>Minions:</strong>
+              {' '}
+              {gameConfig.minionIds
                 .map((id) => catalog.minions[id]?.name)
-                .join(', ')}`}
+                .join(', ')}
             </p>
           )}
         </div>
