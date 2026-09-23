@@ -7,7 +7,7 @@ import { generateGameConfig } from '@/game-logic/unmatched';
 import { clearConfig, loadConfig, saveConfig } from '@/storage/config';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './game.scss';
+import './game-page.scss';
 
 // HELPER FUNCTIONS
 const isValidGameConfig = (config) => config

@@ -5,9 +5,9 @@ import { getOwnedBoards, getOwnedChars, pruneBans } from '@/game-logic/unmatched
 import { loadConfig, saveConfig } from '@/storage/config';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './setup.scss';
+import './setup-page.scss';
 
-export default function Setup() {
+export default function SetupPage() {
   // STATE
   const [selectedSets, setSelectedSets] = useState([]);
   const [bannedBoards, setBannedBoards] = useState({});
