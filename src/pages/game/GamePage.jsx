@@ -159,24 +159,41 @@ export default function Game() {
                   )}
 
                   {isFfa && (
-                    <div className="ffa-grid">
-                      {gameConfig.players.map((player, i) => {
-                        const isTrailingOdd = gameConfig.players.length % 2 !== 0
-                          && i === gameConfig.players.length - 1;
+                    <>
+                      {/* mobile: 2-column grid, VS spans both columns as a central hub */}
+                      <div className="ffa-grid">
+                        {gameConfig.players.map((player, i) => {
+                          const isTrailingOdd = gameConfig.players.length % 2 !== 0
+                            && i === gameConfig.players.length - 1;
 
-                        return (
+                          return (
+                            <Fragment key={player.characterId}>
+                              {i === 2 && <span className="vs-badge ffa-vs-badge">VS</span>}
+                              <CharacterCard
+                                character={catalog.characters[player.characterId]}
+                                playerName={player.name}
+                                startingSpace={player.turnOrder}
+                                className={isTrailingOdd ? 'ffa-card-centered' : undefined}
+                              />
+                            </Fragment>
+                          );
+                        })}
+                      </div>
+
+                      {/* desktop: single line, a VS chip between every card */}
+                      <div className="ffa-row">
+                        {gameConfig.players.map((player, i) => (
                           <Fragment key={player.characterId}>
-                            {i === 2 && <span className="vs-badge ffa-vs-badge">VS</span>}
+                            {i > 0 && <span className="vs-chip">VS</span>}
                             <CharacterCard
                               character={catalog.characters[player.characterId]}
                               playerName={player.name}
                               startingSpace={player.turnOrder}
-                              className={isTrailingOdd ? 'ffa-card-centered' : undefined}
                             />
                           </Fragment>
-                        );
-                      })}
-                    </div>
+                        ))}
+                      </div>
+                    </>
                   )}
 
                   {!isDuel && !isTeamMode && !isFfa && gameConfig.players

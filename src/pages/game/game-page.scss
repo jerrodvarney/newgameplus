@@ -200,8 +200,12 @@
   }
 }
 
-/* first 2 cards fill row 1, the VS badge spans both columns onto its
-   own row acting as the central hub, remaining card(s) fill row 3 */
+/* mobile: first 2 cards fill row 1, the VS badge spans both columns
+   onto its own row acting as a central hub, remaining card(s) fill
+   row 3. Desktop switches to .ffa-row (single line, VS between each)
+   instead - the two layouts are different enough in structure that
+   they're both rendered and toggled here rather than reshuffled with
+   pure CSS. */
 .ffa-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -212,13 +216,6 @@
   max-width: 320px;
 }
 
-@media (min-width: 640px) {
-  .ffa-grid {
-    gap: 1.25rem;
-    max-width: 480px;
-  }
-}
-
 .ffa-vs-badge {
   grid-column: 1 / -1;
   justify-self: center;
@@ -226,6 +223,45 @@
 
 .ffa-card-centered {
   grid-column: 1 / -1;
+}
+
+.ffa-row {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .ffa-grid {
+    display: none;
+  }
+
+  .ffa-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  /* cards shrink together to stay on one line instead of wrapping -
+     aspect-ratio keeps them proportional as width shrinks */
+  .ffa-row .character-card {
+    flex: 1 1 220px;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    max-width: 220px;
+    aspect-ratio: 5 / 7;
+  }
+}
+
+.vs-chip {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0 0.25rem;
 }
 
 .character-card {
