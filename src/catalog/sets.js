@@ -27,7 +27,7 @@ export const sets = {
     id: 'ingen-vs-raptors',
     name: 'Ingen vs. Raptors',
     image: '/images/sets/ingen-vs-raptors.webp',
-    characterIds: ['ingen', 'raptors'],
+    characterIds: ['robert-muldoon', 'raptors'],
     boardIds: ['raptor-paddock'],
   },
 

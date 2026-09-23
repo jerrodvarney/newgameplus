@@ -108,13 +108,13 @@ export default function GameSetup({ userConfig, resetConfig }) {
           <h3>How many are playing?</h3>
           <div className="player-btns">
             {modeCapabilities.modes[modeId].allowedPlayerCounts
+              .filter((count) => modeCapabilities.maxPlayers >= count)
               .map((count) => (
                 <button
                   key={`${count}a`}
                   type="button"
                   className={`setup ${count === numPlayers ? 'selected' : null}`}
                   onClick={() => setPlayerCount(count)}
-                  disabled={modeCapabilities.maxPlayers < count}
                 >
                   {count}
                 </button>

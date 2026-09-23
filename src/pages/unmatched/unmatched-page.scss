@@ -32,6 +32,16 @@
   width: 100%;
 }
 
+@media (min-width: 900px) {
+  .mode-btns {
+    grid-template-columns: repeat(3, 1fr);
+
+    button:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
 .player-btns {
   display: flex;
   align-items: center;

@@ -40,9 +40,21 @@ const getMaxPlayersFromBoards = (validBoards = []) => {
 
 const pickRandom = (items = []) => items[Math.floor(Math.random() * items.length)];
 
-const getRandomOrder = (numPlayers) => Array
-  .from({ length: numPlayers }, (_, i) => i + 1)
-  .sort(() => Math.random() - 0.5);
+// Fisher-Yates: array.sort(() => Math.random() - 0.5) is a biased shuffle.
+const shuffle = (items = []) => {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+};
+
+const getRandomOrder = (numPlayers) => shuffle(
+  Array.from({ length: numPlayers }, (_, i) => i + 1),
+);
 
 const getRandomBoardId = ({ ownedSetIds, bannedBoardIds }, numPlayers, modeId) => {
   let validBoards = getValidBoards(ownedSetIds, bannedBoardIds)
@@ -60,7 +72,7 @@ const assignCharacters = ({ ownedSetIds, bannedCharacterIds }, playerNames, numP
 
   if (validCharacters.length < numPlayers) return null;
 
-  const shuffled = [...validCharacters].sort(() => Math.random() - 0.5);
+  const shuffled = shuffle(validCharacters);
   const chosen = shuffled.slice(0, numPlayers);
 
   return Array.from({ length: numPlayers }, (_, i) => ({
@@ -184,6 +196,24 @@ export const getCapabilities = ({ ownedSetIds, bannedBoardIds, bannedCharacterId
   return capabilities;
 };
 
+// Each Tales to Amaze board is permanently paired with one villain
+// (mcminnville -> martian-invader, point-pleasant -> mothman) - never
+// randomized independently of the board, and only relevant in tales mode.
+const getVillainId = (modeId, boardId) => {
+  if (modeId !== 'tales') return null;
+  return catalog.boards[boardId]?.requiredVillainId ?? null;
+};
+
+// Minions are drawn at random from the villain's own set, one per player.
+const getMinionIds = (modeId, villainId, numPlayers) => {
+  if (modeId !== 'tales' || !villainId) return [];
+
+  const villainSetId = catalog.villains[villainId]?.setId;
+  const pool = Object.values(catalog.minions).filter((minion) => minion.setId === villainSetId);
+
+  return shuffle(pool).slice(0, numPlayers).map((minion) => minion.id);
+};
+
 export const generateGameConfig = ({
   userConfig, modeId, numPlayers, playerNames,
 }) => {
@@ -195,11 +225,15 @@ export const generateGameConfig = ({
   const players = buildPlayers(userConfig, playerNames, nPlayers, modeId);
   if (!players) return { error: { code: 'NOT_ENOUGH_CHARACTERS' } };
 
+  const villainId = getVillainId(modeId, boardId);
+
   const gameConfig = {
     gameId: 'unmatched',
     modeId,
     numPlayers: nPlayers,
     boardId,
+    villainId,
+    minionIds: getMinionIds(modeId, villainId, nPlayers),
     players,
   };
 

@@ -8,7 +8,7 @@ export const villains = {
     startingSpace: 5,
   },
 
-  martianInvader: {
+  'martian-invader': {
     id: 'martian-invader',
     setId: 'tales-to-amaze',
     name: 'Martian Invader',

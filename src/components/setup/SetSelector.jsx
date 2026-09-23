@@ -10,6 +10,9 @@ export default function SetSelector({ setInfo, updateSelected, selectedSets }) {
       <div className="img-wrapper">
         <img src={setInfo.image} alt={`Art for ${setInfo.name}`} />
       </div>
+      <div className="set-card-info">
+        <span className="set-card-title">{setInfo.name}</span>
+      </div>
     </button>
   );
 }
